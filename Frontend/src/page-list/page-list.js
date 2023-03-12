@@ -32,6 +32,7 @@ export default class PageList extends Page {
         // HTML-Inhalt nachladen
         await super.init();
         this._title = "Übersicht";
+        this._app.backend.fetch();
 
         //// TODO: Anzuzeigende Inhalte laden mit this._app.backend.fetch() ////
         //// TODO: Inhalte in die HTML-Struktur einarbeiten ////

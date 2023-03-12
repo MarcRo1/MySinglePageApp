@@ -29,10 +29,7 @@ html {
 
 @media (min-width: 40em) {
     html {
-        /* http://bg.siteorigin.com/ */
-        background-color: #669ac4;
-        background-image: url(img/background.png);
-
+        background-color: #bdc7ce;
         font-size: 11pt;
     }
 
@@ -84,13 +81,13 @@ nav ul {
 
 nav li.active {
     background-color: #333333;
-    border: 0px solid rgb(33, 146, 187);
+    border: 0px solid rgb(50, 124, 59);
     border-bottom-width: 3px;
 }
 
 nav li:hover {
     background-color: #505050;
 
-    border: 0px solid rgb(103, 197, 231);
+    border: 0px solid rgb(76, 180, 88);
     border-bottom-width: 3px;
 }
