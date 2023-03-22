@@ -50,6 +50,8 @@ export default class AddressService {
             last_name:  address.last_name  || "",
             phone:      address.phone      || "",
             email:      address.email      || "",
+            essen:      address.essen      || "",
+            Preis:      address.preis      || "",
         };
 
         let result = await this._addresses.insertOne(newAddress);
