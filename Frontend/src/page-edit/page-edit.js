@@ -25,6 +25,8 @@ export default class PageEdit extends Page {
             last_name: "",
             phone: "",
             email: "",
+            essen: "",
+            preis: "",
         };
 
         // Eingabefelder
@@ -32,6 +34,8 @@ export default class PageEdit extends Page {
         this._lastNameInput  = null;
         this._phoneInput     = null;
         this._emailInput     = null;
+        this._essenInput     = null;
+        this._preisInput     = null;
     }
 
     /**
@@ -69,6 +73,8 @@ export default class PageEdit extends Page {
         html = html.replace("$FIRST_NAME$", this._dataset.first_name);
         html = html.replace("$PHONE$", this._dataset.phone);
         html = html.replace("$EMAIL$", this._dataset.email);
+        html = html.replace("$ESSEN$", this._dataset.essen);
+        html = html.replace("$PREIS$", this._dataset.preis);
         this._mainElement.innerHTML = html;
 
         // Event Listener registrieren
@@ -80,6 +86,8 @@ export default class PageEdit extends Page {
         this._lastNameInput  = this._mainElement.querySelector("input.last_name");
         this._phoneInput     = this._mainElement.querySelector("input.phone");
         this._emailInput     = this._mainElement.querySelector("input.email");
+        this._essenInput     = this._mainElement.querySelector("input.essen");
+        this._preisInput     = this._mainElement.querySelector("input.preis");
     }
 
     /**
@@ -93,6 +101,8 @@ export default class PageEdit extends Page {
         this._dataset.last_name  = this._lastNameInput.value.trim();
         this._dataset.phone      = this._phoneInput.value.trim();
         this._dataset.email      = this._emailInput.value.trim();
+        this._dataset.essen      = this._essenInput.value.trim();
+        this._dataset.preis      = this._preisInput.value.trim();
 
         if (!this._dataset.first_name) {
             alert("Geben Sie erst einen Vornamen ein.");

@@ -89,6 +89,8 @@ export default class AddressService {
         if (address.last_name)  updateDoc.$set.last_name  = address.last_name;
         if (address.phone)      updateDoc.$set.phone      = address.phone;
         if (address.email)      updateDoc.$set.email      = address.email;
+        if (address.essen)      updateDoc.$set.essen      = address.essen;
+        if (address.Preis)      updateDoc.$set.preis      = address.preis;
 
         await this._addresses.updateOne({_id: new ObjectId(id)}, updateDoc);
         return this._addresses.findOne({_id: new ObjectId(id)});
