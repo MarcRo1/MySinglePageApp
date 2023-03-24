@@ -11,6 +11,7 @@
         margin: 0;
         padding: 1em;
         padding-bottom: 0.5em;
+        font-size: 60%;
 
         background-color: white;
         transition: background-color 0.5s;
@@ -23,24 +24,20 @@
         background-color: #fafafa;
     }
 
-    main .name {
-        font-size: 150%;
-    }
-
     /* AKTIONSBUTTONS */
     main .actions {
         display: flex;
-        justify-content: space-between;
     }
 
     main .actions > div {
         padding: 0.5em;
         margin: 0.5em;
+        flex: 1;
 
         background-color: #e0e0e0;
         transition: background-color 0.5s;
 
-        flex: 1;
+
         text-align: center;
     }
 
@@ -56,10 +53,48 @@
         background-color: #f0f0f0;
         cursor: pointer;
     }
+
+    main nav {
+        background-color: white;
+        display: flex;
+
+    }
+
+    main #aktButton {
+        background-color: lightcoral;
+        margin: 0.5em;
+        padding: 0.5em;
+        flex-grow: 1;
+    }
+
+    main #aktButton:hover {
+        cursor: pointer;
+        background-color: rgb(247, 179, 179);
+    }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    th {
+        background-color: rgb(105, 95, 95);
+        color: white;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
 </style>
 
 <!-- Inhalt der Seite -->
 <main>
+    <nav>
+        <button class="action aktualisieren" id="aktButton">Daten Laden</button>
+    </nav>
     <ol>
         <!-- Platzhalter für eine leere Liste -->
         <li class="empty-placeholder">
@@ -67,30 +102,45 @@
                 Keine Einträge vorhanden
             </div>
         </li>
-
         <!-- Vorlage für einen Eintrag in der Liste -->
         <li class="list-entry" data-id="$ID$">
-            <div class="name">
-                $LAST_NAME$, $FIRST_NAME$
-            </div>
-            <div class="field phone">
-                $PHONE$
-            </div>
-            <div class="field email">
-                $EMAIL$
-            </div>
-            <div class="field email">
-                $ESSEN$
-            </div>
-            <div class="field email">
-                $PREIS$
-            </div>
+            <table>
+                <tr>
+                  <th>Restaurant_Produkt</th>
+                  <th>Preis</th>
+                  <th>Anzahl</th>
+                  <th>Name_Email</th>
+                  <th>ID</th>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name">
+                        $FIRST_NAME$
+                    </div>
+                  </td>
+                  <td>
+                    <div class="field phone">
+                        $LAST_NAME$
+                    </div>
+                  </td>
+                  <td>
+                    <div class="field email">
+                        $PHONE$
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                        $EMAIL$
+                    </div>
+                  </td>
+                </tr>
+            </table>
             <div class="actions">
                 <div class="action edit">
-                    <a>🖊️</a>
+                    <a>Fehlerhafte Bestellung bearbeiten</a>
                 </div>
                 <div class="action delete">
-                    <a>🗑️</a>
+                    <a>Fehlerhafte Bestellung löschen</a>
                 </div>
             </div>
         </li>
