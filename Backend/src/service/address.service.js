@@ -29,7 +29,7 @@ export default class AddressService {
         let cursor = this._addresses.find(query, {
             sort: {
                 first_name: 1,
-                last_name: 1,
+                phone: 1,
             }
         });
 

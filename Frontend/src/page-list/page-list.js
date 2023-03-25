@@ -135,4 +135,5 @@ export default class PageList extends Page {
             }
         }
     }
-};
+}
+    
