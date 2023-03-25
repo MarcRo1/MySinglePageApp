@@ -102,4 +102,11 @@ export default class AddressService {
         let result = await this._addresses.deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
     }
+
+
+    async zählen() {
+        let howmany = await this._addresses.countDocuments();
+        console.log(howmany);
+        return howmany;
+    }
 }
