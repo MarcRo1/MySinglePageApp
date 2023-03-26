@@ -59,12 +59,10 @@ export default class PageList extends Page {
             let html = templateHtml;
 
             html = html.replace("$ID$", dataset._id);
-            html = html.replace("$LAST_NAME$", dataset.last_name);
-            html = html.replace("$FIRST_NAME$", dataset.first_name);
-            html = html.replace("$PHONE$", dataset.phone);
-            html = html.replace("$EMAIL$", dataset.email);
             html = html.replace("$ESSEN$", dataset.essen);
             html = html.replace("$PREIS$", dataset.preis);
+            html = html.replace("$ANZAHL$", dataset.anzahl);
+            html = html.replace("$EMAIL$", dataset.email);
 
             // Element in die Liste einfügen
             let dummyElement = document.createElement("div");
