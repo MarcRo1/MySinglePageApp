@@ -102,8 +102,8 @@ export default class PageEdit extends Page {
         this._dataset.last_name  = this._lastNameInput.value.trim();
         this._dataset.phone      = this._phoneInput.value.trim();
         this._dataset.email      = this._emailInput.value.trim();
-        this._dataset.essen      = this._essenInput.value.trim();
-        this._dataset.preis      = this._preisInput.value.trim();
+        //this._dataset.essen      = this._essenInput.value.trim();
+        //this._dataset.preis      = this._preisInput.value.trim();
 
         if (!this._dataset.first_name) {
             alert("Geben Sie erst einen Vornamen ein.");
