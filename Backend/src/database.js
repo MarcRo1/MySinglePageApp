@@ -33,6 +33,7 @@ class DatabaseFactory {
     async _createDemoData() {
         let addresses = this.database.collection("addresses");
         let orders = this.database.collection("orders");
+        alert("createDemoData ..");
 
         if (await addresses.estimatedDocumentCount() === 0) {
             addresses.insertMany([
