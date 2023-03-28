@@ -35,6 +35,11 @@ export default class RootController {
                 _name: "address",
                 query: {url: "/address", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "email"]},
                 create: {url: "/address", method: "POST"},
+            },
+            {
+                _name: "order",
+                query: {url: "/order", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "email"]},
+                create: {url: "/order", method: "POST"},
             }
         ]);
 

@@ -30,11 +30,14 @@ class App {
                 show: () => this._gotoNew()
             },{
                 url: "^/edit/(.*)$",
-                show: matches => this._gotoEdit(matches[1]),
+                show: matches => this._gotoEdit(matches[1])
+            },{
+                url: "^/orders/$",
+                show: () => this._gotoOrders()
             },{
                 url: ".*",
                 show: () => this._gotoList()
-            },
+            }
         ]);
 
         // Fenstertitel merken, um später den Name der aktuellen Seite anzuhängen
@@ -60,6 +63,21 @@ class App {
             this.showException(ex);
         }
     }
+
+    async _gotoOrders() {
+        try {
+            //alert("Orders");
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageOrders} = await import("./page-orders/page-orders.js");
+
+            let page = new PageOrders(this);
+            await page.init();
+            this._showPage(page, "orders");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
 
     /**
      * Übersichtsseite anzeigen. Wird vom Single Page Router aufgerufen.

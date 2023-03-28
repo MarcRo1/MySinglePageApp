@@ -31,11 +31,8 @@ class DatabaseFactory {
      * wenigstens gleich ein paar Daten.
      */
     async _createDemoData() {
-        alert("start createDemoData ..");
         let addresses = this.database.collection("addresses");
-        alert("after addresses ...");
         let orders = this.database.collection("orders");
-        alert("createDemoData ..");
 
         if (await addresses.estimatedDocumentCount() === 0) {
             addresses.insertMany([
@@ -79,12 +76,16 @@ class DatabaseFactory {
                     last_name: "Tischer",
                     phone: "+49 711 564412",
                     email: "felix@mytischer.de",
+                    essen: 'Pommes Frites',
+                    amount: '10.45'
                 },
                 {
                     first_name: "Linda",
                     last_name: "Tischer",
                     phone: "+49 6341 7799393",
                     email: "linda@mytischer.de",
+                    essen: 'Curry Wurst',
+                    amount: '6'
                 }
             ]);
         }
