@@ -31,7 +31,9 @@ class DatabaseFactory {
      * wenigstens gleich ein paar Daten.
      */
     async _createDemoData() {
+        alert("start createDemoData ..");
         let addresses = this.database.collection("addresses");
+        alert("after addresses ...");
         let orders = this.database.collection("orders");
         alert("createDemoData ..");
 
