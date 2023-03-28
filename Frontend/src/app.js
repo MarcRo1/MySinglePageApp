@@ -35,6 +35,9 @@ class App {
                 url: "^/orders/$",
                 show: () => this._gotoOrders()
             },{
+                url: "^/orderedit/(.*)$",
+                show: matches => this._gotoEditOrder(matches[1])
+            },{
                 url: ".*",
                 show: () => this._gotoList()
             }
@@ -73,6 +76,19 @@ class App {
             let page = new PageOrders(this);
             await page.init();
             this._showPage(page, "orders");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoEditOrder(id) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageOrderEdit} = await import("./page-editorder/page-editorder.js");
+
+            let page = new PageOrderEdit(this, id);
+            await page.init();
+            this._showPage(page, "editorder");
         } catch (ex) {
             this.showException(ex);
         }

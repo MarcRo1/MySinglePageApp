@@ -1,13 +1,11 @@
-"use strict";
-
 import Page from "../page.js";
-import HtmlTemplate from "./page-edit.html";
+import HtmlTemplate from "./page-editorder.html";
 
 /**
  * Klasse PageEdit: Stellt die Seite zum Anlegen oder Bearbeiten einer Adresse
  * zur Verfügung.
  */
-export default class PageEdit extends Page {
+export default class PageOrderEdit extends Page {
     /**
      * Konstruktor.
      *
@@ -26,6 +24,7 @@ export default class PageEdit extends Page {
             phone: "",
             email: "",
             essen: "",
+            anzahl: "",            
             preis: "",
         };
 
@@ -36,6 +35,7 @@ export default class PageEdit extends Page {
         this._emailInput     = null;
         this._essenInput     = null;
         this._preisInput     = null;
+        this._anzahlInput    = null;
     }
 
     /**
@@ -59,12 +59,12 @@ export default class PageEdit extends Page {
 
         // Bearbeiteten Datensatz laden
         if (this._editId) {
-            this._url = `/address/${this._editId}`;
+            this._url = `/order/${this._editId}`;
             this._dataset = await this._app.backend.fetch("GET", this._url);
             this._title = `${this._dataset.first_name} ${this._dataset.last_name}`;
         } else {
-            this._url = `/address`;
-            this._title = "Adresse hinzufügen";
+            this._url = `/order`;
+            this._title = "Bestellung hinzufügen";
         }
 
         // Platzhalter im HTML-Code ersetzen
@@ -75,6 +75,7 @@ export default class PageEdit extends Page {
         html = html.replace("$EMAIL$", this._dataset.email);
         html = html.replace("$ESSEN$", this._dataset.essen);
         html = html.replace("$PREIS$", this._dataset.preis);
+        html = html.replace("$ANZAHL$", this._dataset.anzahl);
         this._mainElement.innerHTML = html;
 
         // Event Listener registrieren
@@ -88,6 +89,7 @@ export default class PageEdit extends Page {
         this._emailInput     = this._mainElement.querySelector("input.email");
         this._essenInput     = this._mainElement.querySelector("input.essen");
         this._preisInput     = this._mainElement.querySelector("input.preis");
+        this._anzahlInput    = this._mainElement.querySelector("input.anzahl");
     }
 
     /**
@@ -98,20 +100,21 @@ export default class PageEdit extends Page {
         //alert("Hello");
         // Eingegebene Werte prüfen
         this._dataset._id        = this._editId;
-        //this._dataset.first_name = this._firstNameInput.value.trim();
-        //this._dataset.last_name  = this._lastNameInput.value.trim();
-        //this._dataset.phone      = this._phoneInput.value.trim();
-        //this._dataset.email      = this._emailInput.value.trim();
+        this._dataset.first_name = this._firstNameInput.value.trim();
+        this._dataset.last_name  = this._lastNameInput.value.trim();
+        this._dataset.phone      = this._phoneInput.value.trim();
+        this._dataset.email      = this._emailInput.value.trim();
         this._dataset.essen      = this._essenInput.value.trim();
         this._dataset.preis      = this._preisInput.value.trim();
+        this._dataset.anzahl     = this._anzahlInput.value.trim();
 
         if (!this._dataset.essen) {
-            alert("Geben Sie erst einen Speisenbezeichnung ein.");
+            alert("Geben Sie das Essen an.");
             return;
         }
 
-        if (!this._dataset.preis) {
-            alert("Geben Sie erst einen Preis ein.");
+        if (!this._dataset.last_name) {
+            alert("Geben Sie erst einen Nachnamen ein.");
             return;
         }
 
@@ -128,6 +131,6 @@ export default class PageEdit extends Page {
         }
 
         // Zurück zur Übersicht
-        location.hash = "#/";
+        location.hash = "#/orders/";
     }
 };

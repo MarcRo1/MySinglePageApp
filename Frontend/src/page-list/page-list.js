@@ -74,8 +74,47 @@ export default class PageList extends Page {
             // Event Handler registrieren
             liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit/${dataset._id}`);
             liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
+            liElement.querySelector(".action.order").addEventListener("click", () => this._makeOrder(dataset));
         }
     }
+
+    /**
+     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
+     * die Adresse löschen will und löscht diese dann.
+     *
+     * @param {Integer} id ID des zu löschenden Datensatzes
+     */
+    async _makeOrder(newOrder) {
+        // Sicherheitsfrage zeigen
+        let answer = confirm("Möchten Sie die Speise bestellen?");
+        if (!answer) return;
+
+        let anzahl = prompt("Wieviel?");
+        let email = prompt("Eingabe eMail-Adresse");
+
+        // Neuer leerer Datensatz für eine Bestellung
+        this._dataset = { first_name: "", last_name: "", phone: "", email: "", essen: "", anzahl: "0", preis: ""  };
+
+        this._dataset.first_name = "Felix";     // dummy daten
+        this._dataset.last_name  = "Tischer";
+        this._dataset.phone      = "089/132 456";
+        this._dataset.anzahl     = anzahl;          // übernehmen
+        this._dataset.email      = email;           // übernehmen
+        this._dataset.essen      = newOrder.essen;  // 
+        this._dataset.preis      = newOrder.preis;
+
+        // Bestellung aufbauen
+        try {
+            this._url = `/order`;
+            this._title = "Bestellung hinzufügen";
+            await this._app.backend.fetch("POST", this._url, {body: this._dataset});        
+        } catch (ex) {
+            this._app.showException(ex);
+            return;
+        }
+    }
+
+
 
     /**
      * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender

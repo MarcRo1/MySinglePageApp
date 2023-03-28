@@ -52,7 +52,8 @@ export default class OrderService {
             phone:      order.phone      || "",
             email:      order.email      || "",
             essen:      order.essen      || "",
-            Preis:      order.preis      || "",
+            preis:      order.preis      || "",
+            anzahl:     order.anzahl     || "",
         };
 
         let result = await this._orders.insertOne(newOrder);
@@ -91,7 +92,8 @@ export default class OrderService {
         if (order.phone)      updateDoc.$set.phone      = order.phone;
         if (order.email)      updateDoc.$set.email      = order.email;
         if (order.essen)      updateDoc.$set.essen      = order.essen;
-        if (order.amount)     updateDoc.$set.amount     = order.amount;
+        if (order.anzahl)     updateDoc.$set.amount     = order.anzahl;
+        if (order.preis)      updateDoc.$set.preis      = order.preis;
 
         await this._orders.updateOne({_id: new ObjectId(id)}, updateDoc);
         return this._orders.findOne({_id: new ObjectId(id)});

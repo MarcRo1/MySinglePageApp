@@ -41,30 +41,40 @@ class DatabaseFactory {
                     last_name: "Tanner",
                     phone: "+49 711 564412",
                     email: "willy.tanner@alf.com",
+                    essen: "Wiener Schnitzel",
+                    preis: "17.90"
                 },
                 {
                     first_name: "Michael",
                     last_name: "Knight",
                     phone: "+49 721 554194",
                     email: "michael@knight-rider.com",
+                    essen: "Pommes Frites",
+                    preis: "4.90"
                 },
                 {
                     first_name: "Fox",
                     last_name: "Mulder",
                     phone: "+49 721 553181",
                     email: "mulder@xfiles.com",
+                    essen: "Nudelsalat",
+                    preis: "11.00"
                 },
                 {
                     first_name: "Dana",
                     last_name: "Scully",
                     phone: "+49 721 572287",
                     email: "scully@xfiles.com",
+                    essen: "Wurstbrot",
+                    preis: "4.5"
                 },
                 {
                     first_name: "Elwood",
                     last_name: "Blues",
                     phone: "+49 721 957338",
                     email: "elwood@blues-brothers.com",
+                    essen: "Spaghetti",
+                    preis: "5.5"
                 },
             ]);
         }
@@ -77,7 +87,9 @@ class DatabaseFactory {
                     phone: "+49 711 564412",
                     email: "felix@mytischer.de",
                     essen: 'Pommes Frites',
-                    amount: '10.45'
+                    essen: 'Wurst',
+                    preis: '10',
+                    anzahl: '1'
                 },
                 {
                     first_name: "Linda",
@@ -85,7 +97,9 @@ class DatabaseFactory {
                     phone: "+49 6341 7799393",
                     email: "linda@mytischer.de",
                     essen: 'Curry Wurst',
-                    amount: '6'
+                    anzahl: '2',
+                    essen: 'Pommes Frites',
+                    preis: '5'
                 }
             ]);
         }

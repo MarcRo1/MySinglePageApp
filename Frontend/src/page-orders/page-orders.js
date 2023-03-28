@@ -61,7 +61,9 @@ export default class PageOrders extends Page {
             html = html.replace("$LAST_NAME$", dataset.last_name);
             html = html.replace("$PHONE$", dataset.phone);
             html = html.replace("$EMAIL$", dataset.email);
-            html = html.replace("$AMOUNT$", dataset.amount);
+            html = html.replace("$ESSEN$", dataset.essen);
+            html = html.replace("$ANZAHL$", dataset.anzahl);
+            html = html.replace("$PREIS$", dataset.preis);
 
             // Element in die Liste einfügen
             let dummyElement = document.createElement("div");
@@ -71,7 +73,7 @@ export default class PageOrders extends Page {
             olElement.appendChild(liElement);
 
             // Event Handler registrieren
-            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit/${dataset._id}`);
+            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/orderedit/${dataset._id}`);
             liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
         }
     }
