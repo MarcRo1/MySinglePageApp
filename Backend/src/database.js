@@ -32,6 +32,7 @@ class DatabaseFactory {
      */
     async _createDemoData() {
         let addresses = this.database.collection("addresses");
+        let orders = this.database.collection("orders");
 
         if (await addresses.estimatedDocumentCount() === 0) {
             addresses.insertMany([
@@ -67,6 +68,25 @@ class DatabaseFactory {
                 },
             ]);
         }
+
+        if (await orders.estimatedDocumentCount() === 0) {
+            orders.insertMany([
+                {
+                    first_name: "Felix",
+                    last_name: "Tischer",
+                    phone: "+49 711 564412",
+                    email: "felix@mytischer.de",
+                },
+                {
+                    first_name: "Linda",
+                    last_name: "Tischer",
+                    phone: "+49 6341 7799393",
+                    email: "linda@mytischer.de",
+                }
+            ]);
+        }
+       
+
     }
 }
 
