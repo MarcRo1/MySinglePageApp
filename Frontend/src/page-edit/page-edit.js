@@ -95,6 +95,7 @@ export default class PageEdit extends Page {
      * in die Listenübersicht zurück.
      */
     async _saveAndExit() {
+        alert("Hello");
         // Eingegebene Werte prüfen
         this._dataset._id        = this._editId;
         this._dataset.first_name = this._firstNameInput.value.trim();
