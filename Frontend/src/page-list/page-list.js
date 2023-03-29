@@ -15,7 +15,17 @@ export default class PageList extends Page {
     constructor(app) {
         super(app, HtmlTemplate);
 
-        this._emptyMessageElement = null;
+        this._dataset = {
+            first_name: "",
+            last_name: "",
+            phone: "",
+            email: "",
+        };
+
+        this._restaurantNameInput = null;
+        this._speiseNameInput  = null;
+        this._preisInput     = null;
+        this._anzahlInput     = null;
     }
 
     /**
@@ -36,73 +46,69 @@ export default class PageList extends Page {
     async init() {
         // HTML-Inhalt nachladen
         await super.init();
-        this._title = "Übersicht";
+        this._title = "Bestellung";
+        this._url = `/address`; 
 
-        // Platzhalter anzeigen, wenn noch keine Daten vorhanden sind
-        let data = await this._app.backend.fetch("GET", "/address");
-        this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
+        let _betellen1 = this._mainElement.querySelector(".action_bestellen1");
+        let _betellen2 = this._mainElement.querySelector(".action_bestellen2");
+        let _betellen3 = this._mainElement.querySelector(".action_bestellen3");       
 
-        if (data.length) {
-            this._emptyMessageElement.classList.add("hidden");
-        }
+        _betellen1.addEventListener("click", (e) => {
+            let _restaurant_name = this.mainElement.querySelector(".restaurant_name1");
+            let _speise_name = this.mainElement.querySelector(".speise_name1");
+            let _preis = this.mainElement.querySelector(".preis1");
+            let _anzahl = this.mainElement.querySelector("#anzahl1");
+            this.bestellen(_restaurant_name, _speise_name, _preis, _anzahl);
+        });
 
-        // Je Datensatz einen Listeneintrag generieren
-        let olElement = this._mainElement.querySelector("ol");
+        _betellen2.addEventListener("click", (e) => {
+            let _restaurant_name = this.mainElement.querySelector(".restaurant_name2");
+            let _speise_name = this.mainElement.querySelector(".speise_name2");
+            let _preis = this.mainElement.querySelector(".preis2");
+            let _anzahl = this.mainElement.querySelector("#anzahl2");
+            this.bestellen(_restaurant_name, _speise_name, _preis, _anzahl);
+        });
 
-        let templateElement = this._mainElement.querySelector(".list-entry");
-        let templateHtml = templateElement.outerHTML;
-        templateElement.remove();
-
-        for (let index in data) {
-            // Platzhalter ersetzen
-            let dataset = data[index];
-            let html = templateHtml;
-
-            html = html.replace("$ID$", dataset._id);
-            html = html.replace("$LAST_NAME$", dataset.last_name);
-            html = html.replace("$FIRST_NAME$", dataset.first_name);
-            html = html.replace("$PHONE$", dataset.phone);
-            html = html.replace("$EMAIL$", dataset.email);
-
-            // Element in die Liste einfügen
-            let dummyElement = document.createElement("div");
-            dummyElement.innerHTML = html;
-            let liElement = dummyElement.firstElementChild;
-            liElement.remove();
-            olElement.appendChild(liElement);
-
-            // Event Handler registrieren
-            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit/${dataset._id}`);
-            liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
-        }
+        _betellen3.addEventListener("click", (e) => {
+            let _restaurant_name = this.mainElement.querySelector(".restaurant_name3");
+            let _speise_name = this.mainElement.querySelector(".speise_name3");
+            let _preis = this.mainElement.querySelector(".preis3");
+            let _anzahl = this.mainElement.querySelector("#anzahl3");
+            this.bestellen(_restaurant_name, _speise_name, _preis, _anzahl);
+        }); 
+        
     }
 
-    /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
-     *
-     * @param {Integer} id ID des zu löschenden Datensatzes
-     */
-    async _askDelete(id) {
-        // Sicherheitsfrage zeigen
-        let answer = confirm("Soll die ausgewählte Adresse wirklich gelöscht werden?");
+    
+    async bestellen(a,b,c,d){
+        this._restaurantNameInput = a.innerHTML;
+        this._speiseNameInput  = b.innerHTML;
+        this._preisInput     = c.innerHTML;
+        this._anzahlInput     = d.value;
+
+     
+
+        let answer = confirm("Wollen Sie wirklich betellen?");
         if (!answer) return;
-
-        // Datensatz löschen
-        try {
-            this._app.backend.fetch("DELETE", `/address/${id}`);
-        } catch (ex) {
-            this._app.showException(ex);
+        if (parseInt(this._anzahlInput) === 0) {
+            confirm("bitte die richtige Anzahl eingeben");
             return;
+        }   
+   
+
+        this._dataset.first_name = this._restaurantNameInput.trim() + "_" + this._speiseNameInput.trim();
+        this._dataset.last_name = this._preisInput.trim().toString();
+        this._dataset.phone = this._anzahlInput.trim().toString();
+
+      
+
+        try {
+                await this._app.backend.fetch("POST", this._url, {body: this._dataset});
+                alert("bestellt")
+            } catch (ex) {      
+                this._app.showException(ex);
+                return;
         }
 
-        // HTML-Element entfernen
-        this._mainElement.querySelector(`[data-id="${id}"]`)?.remove();
-
-        if (this._mainElement.querySelector("[data-id]")) {
-            this._emptyMessageElement.classList.add("hidden");
-        } else {
-            this._emptyMessageElement.classList.remove("hidden");
-        }
     }
 };
