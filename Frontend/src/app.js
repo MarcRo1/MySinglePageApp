@@ -25,19 +25,19 @@ class App {
             {
                 url: "^/$",
                 show: () => this._gotoList()
-            },{
+            }, {
                 url: "^/new/$",
                 show: () => this._gotoNew()
-            },{
+            }, {
                 url: "^/edit/(.*)$",
                 show: matches => this._gotoEdit(matches[1]),
-            },{
-                url: ".*",
-                show: () => this._gotoList()
-            },{
+            }, {
                 url: "^/admin/$",
                 show: () => this._gotoAdmin()
-            },
+            }, {
+                url: ".*",
+                show: () => this._gotoList()
+            }, 
         ]);
 
         // Fenstertitel merken, um später den Name der aktuellen Seite anzuhängen
@@ -70,7 +70,7 @@ class App {
     async _gotoList() {
         try {
             // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
-            let {default: PageList} = await import("./page-list/page-list.js");
+            let { default: PageList } = await import("./page-list/page-list.js");
 
             let page = new PageList(this);
             await page.init();
@@ -80,21 +80,21 @@ class App {
         }
     }
 
-        /**
-     * Adminseite anzeigen. Wird vom Single Page Router aufgerufen.
-     */
-        async _gotoAdmin() {
-            try {
-                // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
-                let {default: PageList} = await import("./page-list/page-list.js");
-    
-                let page = new PageList(this);
-                await page.init();
-                this._showPage(page, "list");
-            } catch (ex) {
-                this.showException(ex);
-            }
+    /**
+ * Adminseite anzeigen. Wird vom Single Page Router aufgerufen.
+ */
+    async _gotoAdmin() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let { default: PageAdmin } = await import("./page-admin/page-admin.js");
+
+            let page = new PageAdmin(this);
+            await page.init();
+            this._showPage(page, "admin");
+        } catch (ex) {
+            this.showException(ex);
         }
+    }
 
     /**
      * Seite zum Anlegen einer neuen Adresse anzeigen.  Wird vom Single Page
@@ -103,7 +103,7 @@ class App {
     async _gotoNew() {
         try {
             // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
-            let {default: PageEdit} = await import("./page-edit/page-edit.js");
+            let { default: PageEdit } = await import("./page-edit/page-edit.js");
 
             let page = new PageEdit(this);
             await page.init();
@@ -122,7 +122,7 @@ class App {
     async _gotoEdit(id) {
         try {
             // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
-            let {default: PageEdit} = await import("./page-edit/page-edit.js");
+            let { default: PageEdit } = await import("./page-edit/page-edit.js");
 
             let page = new PageEdit(this, id);
             await page.init();
