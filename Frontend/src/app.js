@@ -34,6 +34,9 @@ class App {
             },{
                 url: ".*",
                 show: () => this._gotoList()
+            },{
+                url: "^/admin/$",
+                show: () => this._gotoAdmin()
             },
         ]);
 
@@ -76,6 +79,22 @@ class App {
             this.showException(ex);
         }
     }
+
+        /**
+     * Adminseite anzeigen. Wird vom Single Page Router aufgerufen.
+     */
+        async _gotoAdmin() {
+            try {
+                // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+                let {default: PageList} = await import("./page-list/page-list.js");
+    
+                let page = new PageList(this);
+                await page.init();
+                this._showPage(page, "list");
+            } catch (ex) {
+                this.showException(ex);
+            }
+        }
 
     /**
      * Seite zum Anlegen einer neuen Adresse anzeigen.  Wird vom Single Page
