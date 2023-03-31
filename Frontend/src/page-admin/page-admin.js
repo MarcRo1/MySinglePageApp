@@ -20,6 +20,8 @@ export default class PageAdmin extends Page {
         this.stateAkt = 0;
 
         this.nichtbestellt = "Nicht bestellt!";
+
+        this.schlüssel = "admin";
     }
 
     /**
@@ -47,6 +49,8 @@ export default class PageAdmin extends Page {
         this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
         this._tempElement = this._mainElement.querySelector(".list-entry");
         this._tempElement.classList.add("hidden");
+
+        // testing : this._farbElement = this._mainElement.querySelector(".farb");
 
         if (data.length) {
             this._emptyMessageElement.classList.add("hidden");
@@ -93,7 +97,7 @@ export default class PageAdmin extends Page {
     */
     async _aktualisieren() {
         // Pop Up
-        let answer = confirm("Daten abrufen?");
+        let answer = this._getpassword();
         if (!answer) return;
         else {
             if (this.stateAkt == 0) {
@@ -115,7 +119,7 @@ export default class PageAdmin extends Page {
                     html = html.replace("$LAST_NAME$", dataset.last_name);
                     html = html.replace("$FIRST_NAME$", dataset.first_name);
                     html = html.replace("$PHONE$", dataset.phone);
-
+                    // Anzeigen ob die Bestellung auch bezahlt wurde oder nicht
                     if (dataset.email == "") {
                         html = html.replace("$EMAIL$", this.nichtbestellt);
                     } else {
@@ -140,5 +144,19 @@ export default class PageAdmin extends Page {
                 return;
             }
         }
+    }
+
+    /**
+     * Prüft das eingegebene Passwort und verhindert damit, dass einsehen der Daten von normalen Usern
+    */
+    _getpassword() {
+        var password = prompt("Passwort:");
+        if (password == this.schlüssel) {
+            return true;;
+        } else {
+            alert("Passwort falsch!");
+            return false;
+        }
+
     }
 }
