@@ -1,0 +1,143 @@
+<!-- Stylesheet der Seite -->
+<style>
+    /* LISTENEINTRÄGE */
+    main ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    main li {
+        margin: 0;
+        padding: 1em;
+        padding-bottom: 0.5em;
+
+        background-color: white;
+        transition: background-color 0.5s;
+
+        border: 0px solid lightgrey;
+        border-bottom-width: 1px;
+    }
+
+    main li:hover {
+        background-color: #fafafa;
+    }
+
+    main .name {
+        font-size: 150%;
+    }
+
+    /* AKTIONSBUTTONS */
+    main .actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    main .actions > div {
+        padding: 0.5em;
+        margin: 0.5em;
+
+        background-color: #e0e0e0;
+        transition: background-color 0.5s;
+
+        flex: 1;
+        text-align: center;
+    }
+
+    main .actions > div:first-child {
+        margin-left: 0;
+    }
+
+    main .actions > div:last-child {
+        margin-right: 0;
+    }
+
+    main .actions > div:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+</style>
+
+<!-- Inhalt der Seite -->
+<main>
+    <ol>
+        <li>
+           <div class="restaurant_name1">
+               KFC
+           </div>
+           <div class="speise_name1">
+               Pommes
+           </div>
+           <div>
+               Preis: 
+               <span class="preis1"> 7 </span>
+               <span> € </span>
+           </div>
+           <div>
+               Anzahl:
+               <input type="number" value="0" max="5" min="0" name="" id="anzahl1">
+           </div>
+           <div class="actions">
+               <div class="action_bestellen1">
+                   <a>bestellen</a>
+               </div>
+           </div>
+       </li>
+
+       <li>
+           <div class="restaurant_name2">
+               Asia Wok
+           </div>
+           <div class="speise_name2">
+               Sushi
+           </div>
+           <div>
+               Preis: 
+               <span class="preis2"> 9 </span>
+               <span> € </span>
+           </div>
+           <div>
+               Anzahl:
+               <input type="number" value="0" max="5" min="0" name="" id="anzahl2">
+           </div>
+           <div class="actions">
+               <div class="action_bestellen2">
+                   <a >bestellen</a>
+               </div>
+           </div>
+       </li>
+
+       <li>
+           <div class="restaurant_name3">
+               Pizzaria
+           </div>
+           <div class="speise_name3">
+               Flammkuchen
+           </div>
+           <div>
+               Preis: 
+               <span class="preis3"> 8 </span>
+               <span> € </span>
+           </div>
+           <div>
+               Anzahl:
+               <input type="number" value="0" max="5" min="0" name="" id="anzahl3">
+           </div>
+           <div class="actions">
+               <div class="action_bestellen3">
+                   <a>bestellen</a>
+               </div>
+           </div>
+       </li>
+
+       <li>
+           <div class="actions">
+               <div class="action_bezahlen">
+                   <a>bezahlen</a>
+               </div>
+           </div>
+       </li>
+       
+
+   </ol>
+</main>
