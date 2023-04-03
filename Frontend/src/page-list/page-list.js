@@ -86,28 +86,31 @@ export default class PageList extends Page {
      */
     async _makeOrder(newOrder) {
         // Sicherheitsfrage zeigen
-        let answer = confirm("Möchten Sie die Speise bestellen?");
+        let answer = confirm("Möchten Sie das Essen bestellen?");
         if (!answer) return;
 
-        let anzahl = prompt("Wieviel?");
-        let email = prompt("Eingabe eMail-Adresse");
+        let anzahl = prompt("Wieviel mal?");
+        //let email = prompt("Eingabe eMail-Adresse");
 
         // Neuer leerer Datensatz für eine Bestellung
-        this._dataset = { first_name: "", last_name: "", phone: "", email: "", essen: "", anzahl: "0", preis: ""  };
+        this._dataset = { first_name: "", last_name: "", phone: "", email: "", essen: "", anzahl: "0", preis: "", amount: "0", payed: false  };
 
-        this._dataset.first_name = "Felix";     // dummy daten
-        this._dataset.last_name  = "Tischer";
-        this._dataset.phone      = "089/132 456";
+        this._dataset.first_name = "";     // dummy daten
+        this._dataset.last_name  = "";
+        this._dataset.phone      = "";
         this._dataset.anzahl     = anzahl;          // übernehmen
-        this._dataset.email      = email;           // übernehmen
-        this._dataset.essen      = newOrder.essen;  // 
+        this._dataset.email      = "";              // wird später beim bezahlen übernommen
+        this._dataset.essen      = newOrder.essen;  // 1
         this._dataset.preis      = newOrder.preis;
+        this._dataset.amount     = newOrder.preis * anzahl;  // was ist zu bezahlen?
+        this._dataset.payed      = false;
 
         // Bestellung aufbauen
         try {
             this._url = `/order`;
             this._title = "Bestellung hinzufügen";
-            await this._app.backend.fetch("POST", this._url, {body: this._dataset});        
+            await this._app.backend.fetch("POST", this._url, {body: this._dataset});
+            alert("Neue Bestellung abgeschickt");
         } catch (ex) {
             this._app.showException(ex);
             return;

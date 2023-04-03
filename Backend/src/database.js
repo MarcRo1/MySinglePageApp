@@ -79,30 +79,20 @@ class DatabaseFactory {
             ]);
         }
 
-        if (await orders.estimatedDocumentCount() === 0) {
-            orders.insertMany([
-                {
-                    first_name: "Felix",
-                    last_name: "Tischer",
-                    phone: "+49 711 564412",
-                    email: "felix@mytischer.de",
-                    essen: 'Pommes Frites',
-                    essen: 'Wurst',
-                    preis: '10',
-                    anzahl: '1'
-                },
-                {
-                    first_name: "Linda",
-                    last_name: "Tischer",
-                    phone: "+49 6341 7799393",
-                    email: "linda@mytischer.de",
-                    essen: 'Curry Wurst',
-                    anzahl: '2',
-                    essen: 'Pommes Frites',
-                    preis: '5'
-                }
-            ]);
-        }
+        // if (await orders.estimatedDocumentCount() === 0) {
+        //     orders.insertMany([
+        //         {
+        //             first_name: "Linda",
+        //             last_name: "Tischer",
+        //             phone: "+49 6341 7799393",
+        //             email: "linda@mytischer.de",
+        //             essen: 'Curry Wurst',
+        //             anzahl: '2',
+        //             essen: 'Pommes Frites',
+        //             preis: '5'
+        //         }
+        //     ]);
+        // }
        
 
     }

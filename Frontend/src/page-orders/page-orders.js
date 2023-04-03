@@ -64,6 +64,12 @@ export default class PageOrders extends Page {
             html = html.replace("$ESSEN$", dataset.essen);
             html = html.replace("$ANZAHL$", dataset.anzahl);
             html = html.replace("$PREIS$", dataset.preis);
+            html = html.replace("$AMOUNT$", dataset.amount);
+            html = html.replace("$PAYED$", dataset.payed);
+
+            if (dataset.payed == true) {
+                html = html.replace("bezahlen", "Ist bezahlt");
+            }
 
             // Element in die Liste einfügen
             let dummyElement = document.createElement("div");
@@ -73,14 +79,43 @@ export default class PageOrders extends Page {
             olElement.appendChild(liElement);
 
             // Event Handler registrieren
-            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/orderedit/${dataset._id}`);
+            liElement.querySelector(".action.pay").addEventListener("click", () => this._collectMoney(dataset));
+            // liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/orderedit/${dataset._id}`);
             liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
         }
     }
 
+    async _collectMoney(newOrder) {
+        this._editId = newOrder._id;
+
+        if (newOrder.payed == true) {
+            alert("Bestellung ist schon bezahlt");
+            return;
+        }
+        // Sicherheitsfrage zeigen
+        let answer = confirm("Möchten Sie jetzt bezahlen?");
+        if (!answer) return;
+        let email = prompt("Eingabe eMail-Adresse");
+        newOrder.email = email;
+        newOrder.payed = true;
+
+        // Bestellung als bezahlt aktualisieren
+        try {
+            this._url = `/order`;
+            this._url = `/order/${this._editId}`;
+            this._title = "Bestellung aktualisieren";
+            await this._app.backend.fetch("PUT", this._url, {body: newOrder}); 
+            location.reload();
+
+        } catch (ex) {
+            this._app.showException(ex);
+            return;
+        }
+    }
+
     /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
+     * Löschen der übergebenen Bestellung. Zeigt einen Popup, ob der Anwender
+     * die Bestellung löschen will und löscht diese dann.
      *
      * @param {Integer} id ID des zu löschenden Datensatzes
      */

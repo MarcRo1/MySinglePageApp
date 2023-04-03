@@ -70,34 +70,22 @@
 
         <!-- Vorlage für einen Eintrag in der Liste -->
         <li class="list-entry" data-id="$ID$">
-            <div class="field essen">
-                Vorname: $FIRST_NAME$
-            </div>
-            <div class="field preis">
-                Nachname: $LAST_NAME$
-            </div>
-            <div class="field anzahl">
-                Telefon: $PHONE$
-            </div>
+            <!-- <div class="field essen">Vorname: $FIRST_NAME$</div><div class="field preis">Nachname: $LAST_NAME$</div><div class="field anzahl">Telefon: $PHONE$</div> -->
             <div class="field email">
                 eMail-Adresse: $EMAIL$
             </div>
-            <div class="field essen">
-                Essen: $ESSEN$
-            </div>
+            <div class="field essen">Essen: $ESSEN$ &nbsp;&nbsp; Anzahl: $ANZAHL$ &nbsp; Preis: $PREIS$</div>
             <div class="field amount">
-                Anzahl: $ANZAHL$
+                <a>Zu zahlen: $AMOUNT$</a>
             </div>
-            <div class="field amount">
-                Preis: $PREIS$
+            <div class="field payed">
+                <a>Ist bezahlt: $PAYED$</a>
             </div>
             <div class="actions">
-                <div class="action bezahlen">
+                <div class="action pay">
                     <a>bezahlen</a>
                 </div>
-                <div class="action edit">
-                    <a>bearbeiten</a>
-                </div>
+                <!-- <div class="action edit"> <a>bearbeiten</a> </div> -->
                 <div class="action delete">
                     <a>Löschen</a>
                 </div>

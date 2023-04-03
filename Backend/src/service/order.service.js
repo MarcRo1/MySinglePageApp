@@ -54,6 +54,8 @@ export default class OrderService {
             essen:      order.essen      || "",
             preis:      order.preis      || "",
             anzahl:     order.anzahl     || "",
+            amount:     order.amount     || "",
+            payed:      order.payed      || false
         };
 
         let result = await this._orders.insertOne(newOrder);
@@ -94,6 +96,8 @@ export default class OrderService {
         if (order.essen)      updateDoc.$set.essen      = order.essen;
         if (order.anzahl)     updateDoc.$set.amount     = order.anzahl;
         if (order.preis)      updateDoc.$set.preis      = order.preis;
+        if (order.amount)     updateDoc.$set.amount     = order.amount;
+        if (order.payed)      updateDoc.$set.payed      = order.payed;
 
         await this._orders.updateOne({_id: new ObjectId(id)}, updateDoc);
         return this._orders.findOne({_id: new ObjectId(id)});
