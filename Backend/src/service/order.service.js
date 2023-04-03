@@ -47,9 +47,9 @@ export default class OrderService {
         order = order || {};
 
         let newOrder = {
-            first_name: order.first_name || "",
-            last_name:  order.last_name  || "",
-            phone:      order.phone      || "",
+            // first_name: order.first_name || "",
+            // last_name:  order.last_name  || "",
+            // phone:      order.phone      || "",
             email:      order.email      || "",
             essen:      order.essen      || "",
             preis:      order.preis      || "",
