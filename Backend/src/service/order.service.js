@@ -94,9 +94,9 @@ export default class OrderService {
         if (order.phone)      updateDoc.$set.phone      = order.phone;
         if (order.email)      updateDoc.$set.email      = order.email;
         if (order.essen)      updateDoc.$set.essen      = order.essen;
-        if (order.anzahl)     updateDoc.$set.amount     = order.anzahl;
+        if (order.anzahl)     updateDoc.$set.anzahl     = order.anzahl;
         if (order.preis)      updateDoc.$set.preis      = order.preis;
-        if (order.amount)     updateDoc.$set.amount     = order.amount;
+       // if (order.amount)     updateDoc.$set.amount     = order.amount;
         if (order.payed)      updateDoc.$set.payed      = order.payed;
 
         await this._orders.updateOne({_id: new ObjectId(id)}, updateDoc);
