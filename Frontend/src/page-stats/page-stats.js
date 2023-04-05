@@ -15,8 +15,6 @@ export default class PageStats extends Page {
     constructor(app) {
         super(app, HtmlTemplate);
 
-        this._emptyMessageElement = null;
-
         this.stateAkt = 0;
 
         this.nichtbestellt = "Nicht bestellt!";
@@ -61,12 +59,9 @@ export default class PageStats extends Page {
 
         // Inhalte verstecken und Placeholder
         let data = await this._app.backend.fetch("GET", "/order");
-        this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
-        this._tempElement = this._mainElement.querySelector(".list-entry");
-        this._tempElement.classList.add("hidden");
 
-        if (data.length) {
-            this._emptyMessageElement.classList.add("hidden");
+        if (data.length == 0) {
+            alert("Keine Bestellungen vorhanden!")
         }
 
         // Aktualisieren Button
@@ -84,40 +79,7 @@ export default class PageStats extends Page {
         if (!answer) return;
         else {
             if (this.stateAkt == 0) {
-                // Je Datensatz einen Listeneintrag generieren
-                this._tempElement.classList.remove("hidden");
                 let data = await this._app.backend.fetch("GET", "/order");
-                let olElement = this._mainElement.querySelector("ol");
-    
-                let templateElement = this._mainElement.querySelector(".list-entry");
-                let templateHtml = templateElement.outerHTML;
-                templateElement.remove();
-    
-                for (let index in data) {
-                    // Platzhalter ersetzen
-                    let dataset = data[index];
-                    let html = templateHtml;
-    
-                    html = html.replace("$ID$", dataset._id);
-                    html = html.replace("$ESSEN$", dataset.essen);
-                    html = html.replace("$ANZAHL$", dataset.anzahl);
-                    html = html.replace("$PREIS$", dataset.preis);
-                    // Anzeigen ob die Bestellung auch bezahlt wurde oder nicht
-                    if (dataset.email == "") {
-                        html = html.replace("$EMAIL$", this.nichtbestellt);
-                    } else {
-                        html = html.replace("$EMAIL$", dataset.email);
-                    }
-    
-                    // Element in die Liste einfügen
-                    let dummyElement = document.createElement("div");
-                    dummyElement.innerHTML = html;
-                    let liElement = dummyElement.firstElementChild;
-                    liElement.remove();
-                    olElement.appendChild(liElement);
-
-                }
-
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].email == "") {
                     } else {
