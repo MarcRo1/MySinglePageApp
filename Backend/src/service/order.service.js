@@ -54,8 +54,8 @@ export default class OrderService {
             essen:      order.essen      || "",
             preis:      order.preis      || "",
             anzahl:     order.anzahl     || "",
-            amount:     order.amount     || "",
-            payed:      order.payed      || false
+            //amount:     order.amount     || "",
+            //payed:      order.payed      || false
         };
 
         let result = await this._orders.insertOne(newOrder);
