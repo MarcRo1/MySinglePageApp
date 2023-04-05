@@ -1,13 +1,14 @@
 openapi: 3.0.0
 info:
   title: Adressbuch
-  description: "Die Bestell-App nutzt einen simplen REST-Webservices zur Kommunikation\
+  description: "Die Adressbuch-App nutzt einen simplen REST-Webservices zur Kommunikation\
     \ mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche,\
-    \ Anzeige, Bearbeitung und Löschung von Orders, wobei jede Order aus einer\
-    \ Email, Preis, Adresse und einer Anzahl besteht."
+    \ Anzeige, Bearbeitung und Löschung von Adressen, wobei jede Adresse aus einem\
+    \ Vornamen, Nachnamen, Telefonnummer und eine E-Mailadresse besteht."
   contact:
-    name: Gruppenarbeit Verteiltse Systeme
+    name: Dennis Schulmeister-Zimolong
     url: https://www.wpvs.de
+    email: dhbw@windows3.de
   license:
     name: CC-BY-4.0
     url: https://creativecommons.org/licenses/by/4.0/deed.de
@@ -16,6 +17,7 @@ servers:
 - url: http://localhost:3000
 tags:
 - name: Index
+- name: Adresse
 - name: Order
 paths:
   /:
@@ -36,43 +38,222 @@ paths:
                   $ref: '#/components/schemas/HATEOAS_Collection'
                 x-content-type: application/json
 
-  
+  /address:
+    get:
+      tags:
+      - Adresse
+      summary: Adressen suchen
+      description: Suche nach Adressen. Gibt eine Liste aller Adressen passend zu
+        den übergebenen Suchkriterien zurück.
+      operationId: search-address
+      parameters:
+      - name: first_name
+        in: query
+        description: Gesuchter Vorname
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: last_name
+        in: query
+        description: Gesuchter Nachname
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: phone
+        in: query
+        description: Gesuchte Telefonnummer
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Gesuchte E-Mailadresse
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+                x-content-type: application/json
+    post:
+      tags:
+      - Adresse
+      summary: Adresse anlegen
+      description: "Neue Adresse anlegen. Speichert die übergebene Adresse in der\
+        \ Datenbank. Der Wert des Feldes \"_id\" wird dabei ignoriert, da in jedem Fall\
+        \ eine neue Adresse mit neuer ID angelegt wird."
+      operationId: create-address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        "201":
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+
+  /address/{id}:
+    get:
+      tags:
+      - Adresse
+      summary: Adresse lesen
+      description: Liest eine einzelne Adresse vom Server.
+      operationId: get-address
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - Adresse überschreiben
+      summary: ""
+      description: "Überschreibt eine vorhandene Adresse auf dem Server. Bis auf die\
+        \ ID können alle Felder geändert werden. Der Versuch, die ID zu ändern, wird\
+        \ vom Server stillschweigend ignoriert."
+      operationId: update-address
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - Einzelne Felder ändern
+      summary: Einzelne Adressfelder ändern
+      description: "Ändert einzelne Felder einer vorhandenen Adresse. Zulässig sind\
+        \ alle Felder bis auf die ID, da diese nachträglich nicht mehr verändert werden\
+        \ darf."
+      operationId: patch-address
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - Adresse
+      summary: Adresse löschen
+      description: Löscht eine Adresse auf dem Server.
+      operationId: delete-address
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+
   /order:
     get:
       tags:
       - Bestellung
-      summary: Bestellung laden
-      description: Lade die Bestellungen. Gibt eine Liste aller Bestellungen passend zu
+      summary: Bestellung suchen
+      description: Suche nach Bestellungen. Gibt eine Liste aller Bestellungen passend zu
         den übergebenen Suchkriterien zurück.
-      operationId: load-order
+      operationId: search-order
       parameters:
-      - email: email
+      - name: first_name
         in: query
-        description: E-Mailadresse
+        description: Gesuchter Vorname
         required: false
         style: form
         explode: true
         schema:
           type: string
-      - name: essen
+      - name: last_name
         in: query
-        description: Essensname
+        description: Gesuchter Nachname
         required: false
         style: form
         explode: true
         schema:
           type: string
-      - name: preis
+      - name: phone
         in: query
-        description: Preis des Essens
+        description: Gesuchte Telefonnummer
         required: false
         style: form
         explode: true
         schema:
           type: string
-      - name: anzahl
+      - name: email
         in: query
-        description: Anzahl des jeweiligen Essens
+        description: Gesuchte E-Mailadresse
         required: false
         style: form
         explode: true
@@ -141,7 +322,7 @@ paths:
       tags:
       - Bestellung überschreiben
       summary: ""
-      description: "Überschreibt eine vorhandene Bestellung auf dem Server. Bis auf die\
+      description: "Überschreibt eine vorhandene AdBestellungresse auf dem Server. Bis auf die\
         \ ID können alle Felder geändert werden. Der Versuch, die ID zu ändern, wird\
         \ vom Server stillschweigend ignoriert."
       operationId: update-order
