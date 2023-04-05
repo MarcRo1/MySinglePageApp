@@ -1,14 +1,13 @@
 openapi: 3.0.0
 info:
   title: Adressbuch
-  description: "Die Adressbuch-App nutzt einen simplen REST-Webservices zur Kommunikation\
+  description: "Die Bestell-App nutzt einen simplen REST-Webservices zur Kommunikation\
     \ mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche,\
-    \ Anzeige, Bearbeitung und Löschung von Adressen, wobei jede Adresse aus einem\
-    \ Vornamen, Nachnamen, Telefonnummer und eine E-Mailadresse besteht."
+    \ Anzeige, Bearbeitung und Löschung von Orders, wobei jede Order aus einer\
+    \ Email, Preis, Adresse und einer Anzahl besteht."
   contact:
-    name: Dennis Schulmeister-Zimolong
+    name: Gruppenarbeit Verteiltse Systeme
     url: https://www.wpvs.de
-    email: dhbw@windows3.de
   license:
     name: CC-BY-4.0
     url: https://creativecommons.org/licenses/by/4.0/deed.de
