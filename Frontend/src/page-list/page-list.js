@@ -93,7 +93,7 @@ export default class PageList extends Page {
 
      
 
-        let answer = confirm("Wollen Sie wirklich betellen?");
+        let answer = confirm("Wollen Sie wirklich bestellen?");
         if (!answer) return;
         if (parseInt(this._anzahlInput) > 10 || parseInt(this._anzahlInput) < 1) {
             confirm("bitte die richtige Anzahl (0<Anzahl<11) eingeben");
