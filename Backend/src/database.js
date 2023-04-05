@@ -86,7 +86,6 @@ class DatabaseFactory {
         //             first_name: "Linda",
         //             last_name: "Tischer",
         //             phone: "+49 6341 7799393",
-        //             email: "linda@mytischer.de",
         //             essen: 'Curry Wurst',
         //             anzahl: '2',
         //             essen: 'Pommes Frites',
