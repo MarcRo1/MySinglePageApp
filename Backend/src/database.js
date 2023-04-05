@@ -20,7 +20,7 @@ class DatabaseFactory {
         // Datenbankverbindung herstellen
         this.client = new MongoClient(connectionUrl);
         await this.client.connect();
-        this.database = this.client.db("adressbook");
+        this.database = this.client.db("orderbook");
 
         await this._createDemoData();
     }
