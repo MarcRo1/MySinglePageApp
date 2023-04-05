@@ -104,6 +104,8 @@ export default class PageStats extends Page {
 
                 // hier kommt kreisdiagramm mit anzahl von bestellungen pro restaurant
 
+                var xValues = ["KFC", "Asia Wok", "Pizzaria"];
+                var yValues = [this.kfcAnzahl, this.asiaAnzahl, this.pizzaAnzahl];
 
 
                 //hier kommt säulendiagramm umsatz pro restaurant
