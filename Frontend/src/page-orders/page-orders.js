@@ -64,8 +64,8 @@ export default class PageOrders extends Page {
             html = html.replace("$ESSEN$", dataset.essen);
             html = html.replace("$ANZAHL$", dataset.anzahl);
             html = html.replace("$PREIS$", dataset.preis);
-            html = html.replace("$AMOUNT$", dataset.amount);
-            html = html.replace("$PAYED$", dataset.payed);
+        //    html = html.replace("$AMOUNT$", dataset.amount);
+        //    html = html.replace("$PAYED$", dataset.payed);
 
             if (dataset.payed == true) {
                 html = html.replace("bezahlen", "Ist bezahlt");
