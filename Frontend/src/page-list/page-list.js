@@ -16,9 +16,9 @@ export default class PageList extends Page {
         super(app, HtmlTemplate);
 
         this._dataset = {
-            first_name: "",
-            last_name: "",
-            phone: "",
+            essen: "",
+            preis: "",
+            anzahl: "",
             email: "",
         };
 
@@ -47,11 +47,12 @@ export default class PageList extends Page {
         // HTML-Inhalt nachladen
         await super.init();
         this._title = "Bestellung";
-        this._url = `/address`; 
+        this._url = `/order`; 
 
         let _betellen1 = this._mainElement.querySelector(".action_bestellen1");
         let _betellen2 = this._mainElement.querySelector(".action_bestellen2");
-        let _betellen3 = this._mainElement.querySelector(".action_bestellen3");       
+        let _betellen3 = this._mainElement.querySelector(".action_bestellen3"); 
+        let _bezahlen = this._mainElement.querySelector(".action_bezahlen");      
 
         _betellen1.addEventListener("click", (e) => {
             let _restaurant_name = this.mainElement.querySelector(".restaurant_name1");
@@ -76,6 +77,10 @@ export default class PageList extends Page {
             let _anzahl = this.mainElement.querySelector("#anzahl3");
             this.bestellen(_restaurant_name, _speise_name, _preis, _anzahl);
         }); 
+
+        _bezahlen.addEventListener("click", (e) => {
+            location.hash = `#/orders/`
+        });
         
     }
 
@@ -96,9 +101,9 @@ export default class PageList extends Page {
         }   
    
 
-        this._dataset.first_name = this._restaurantNameInput.trim() + "_" + this._speiseNameInput.trim();
-        this._dataset.last_name = this._preisInput.trim().toString();
-        this._dataset.phone = this._anzahlInput.trim().toString();
+        this._dataset.essen = this._restaurantNameInput.trim() + "_" + this._speiseNameInput.trim();
+        this._dataset.preis = this._preisInput.trim().toString();
+        this._dataset.anzahl = this._anzahlInput.trim().toString();
 
       
 

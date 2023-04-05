@@ -32,6 +32,9 @@ class App {
                 url: "^/edit/(.*)$",
                 show: matches => this._gotoEdit(matches[1]),
             },{
+                url: "^/bezahlen/(.*)$",
+                show: matches => this._gotoBezahlen(),
+            },{
                 url: ".*",
                 show: () => this._gotoList()
             },
@@ -89,6 +92,19 @@ class App {
             let page = new PageEdit(this);
             await page.init();
             this._showPage(page, "new");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoBezahlen() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageBezahlen} = await import("./page-bezahlen/page-bezahlen.js");
+
+            let page = new PageBezahlen(this);
+            await page.init();
+            this._showPage(page, "bezahlen");
         } catch (ex) {
             this.showException(ex);
         }
