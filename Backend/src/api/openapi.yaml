@@ -257,30 +257,6 @@ components:
           items:
             type: string
 
-    Address:
-      title: Adresse
-      type: object
-      properties:
-        _links:
-          $ref: '#/components/schemas/HATEOAS_Resource'
-        _id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
-        email:
-          type: string
-          pattern: "(.*@.*\\..*)?"
-      example:
-        _id: "621ff9a936997df5baba746e"
-        first_name: "Fox"
-        last_name: "Mulder"
-        email: "mulder@xfiles.com"
-        phone: "+49 721 553181"
-
     Order:
       title: Order
       type: object

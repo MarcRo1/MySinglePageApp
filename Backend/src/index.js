@@ -6,7 +6,7 @@ import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-midd
 
 import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
-import AdressController from "./controller/address.controller.js";
+//import AdressController from "./controller/address.controller.js";
 import OrderController from "./controller/order.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
@@ -92,7 +92,7 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/", openApiFile);
-new AdressController(server, "/address");
+//new AdressController(server, "/address");
 new OrderController(server, "/order");
 
 // Server tatsächlich starten
