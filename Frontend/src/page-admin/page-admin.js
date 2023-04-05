@@ -19,7 +19,7 @@ export default class PageAdmin extends Page {
 
         this.stateAkt = 0;
 
-        this.nichtbestellt = "Nicht bestellt!";
+        this.nichtbestellt = "!--- NOCH NICHT BEZAHLT ---!";
 
         this.schlüssel = "admin";
     }
@@ -49,8 +49,6 @@ export default class PageAdmin extends Page {
         this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
         this._tempElement = this._mainElement.querySelector(".list-entry");
         this._tempElement.classList.add("hidden");
-
-        // testing : this._farbElement = this._mainElement.querySelector(".farb");
 
         if (data.length) {
             this._emptyMessageElement.classList.add("hidden");

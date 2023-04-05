@@ -22,6 +22,12 @@ export default class PageStats extends Page {
         this.nichtbestellt = "Nicht bestellt!";
 
         this.schlüssel = "admin";
+
+        this.counting = 0;
+
+        this.restaurantAnzahl = [];
+
+        this.restaurantUmsatz = [];
     }
 
     /**
@@ -42,7 +48,7 @@ export default class PageStats extends Page {
     async init() {
         // HTML-Inhalt nachladen
         await super.init();
-        this._title = "Admin";
+        this._title = "Stats";
 
         // Inhalte verstecken und Placeholder
         let data = await this._app.backend.fetch("GET", "/order");
@@ -50,52 +56,20 @@ export default class PageStats extends Page {
         this._tempElement = this._mainElement.querySelector(".list-entry");
         this._tempElement.classList.add("hidden");
 
-        // testing : this._farbElement = this._mainElement.querySelector(".farb");
-
         if (data.length) {
             this._emptyMessageElement.classList.add("hidden");
         }
 
         // Aktualisieren Button
         let bElement = this._mainElement.querySelector("nav");
-        bElement.querySelector(".action.aktualisieren").addEventListener("click", () => this._aktualisieren());
+        bElement.querySelector(".action.stats").addEventListener("click", () => this._statszeigen());
 
     }
-
-    /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
-     *
-     * @param {Integer} id ID des zu löschenden Datensatzes
-     */
-    async _askDelete(id) {
-        // Sicherheitsfrage zeigen
-        let answer = confirm("Soll die ausgewählte Adresse wirklich gelöscht werden?");
-        if (!answer) return;
-
-        // Datensatz löschen
-        try {
-            this._app.backend.fetch("DELETE", `/order/${id}`);
-        } catch (ex) {
-            this._app.showException(ex);
-            return;
-        }
-
-        // HTML-Element entfernen
-        this._mainElement.querySelector(`[data-id="${id}"]`)?.remove();
-
-        if (this._mainElement.querySelector("[data-id]")) {
-            this._emptyMessageElement.classList.add("hidden");
-        } else {
-            this._emptyMessageElement.classList.remove("hidden");
-        }
-    }
-
     /**
      * @param {Booleen} state Status
      * @param {Integer} anzahlAkt Anzahl der Aktualisierungen pro Sitzung
     */
-    async _aktualisieren() {
+    async _statszeigen() {
         // Pop Up
         let answer = this._getpassword();
         if (!answer) return;
@@ -125,6 +99,8 @@ export default class PageStats extends Page {
                     } else {
                         html = html.replace("$EMAIL$", dataset.email);
                     }
+
+                    console.log(this.datenarray);
     
                     // Element in die Liste einfügen
                     let dummyElement = document.createElement("div");
@@ -132,15 +108,18 @@ export default class PageStats extends Page {
                     let liElement = dummyElement.firstElementChild;
                     liElement.remove();
                     olElement.appendChild(liElement);
-    
-                    // Event Handler registrieren
-                    liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
-    
+
+                    
                 }
-            //Doppeltes Aktualiseren verhindern, da dies zu Anzeigedoppelungen führt
+
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data[i].essen);
+                }
+
+            //Button nur einmal drücken können
                 this.stateAkt++;
             } else { // 
-                alert("Die Daten sind eventuell nicht mehr auf dem neusten Stand. Laden sie die Seite neu.")
+                alert("Die Statistiken sind schon geladen")
                 return;
             }
         }
