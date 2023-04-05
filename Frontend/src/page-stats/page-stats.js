@@ -23,7 +23,7 @@ export default class PageStats extends Page {
 
         this.schlüssel = "admin";
 
-        this.counting = 0;
+        this.gesamtUmsatz = 0;
 
         this.kfcAnzahl = 0;
 
@@ -31,9 +31,12 @@ export default class PageStats extends Page {
 
         this.pizzaAnzahl = 0;
 
-        this.restaurantAnzahl = [];
+        this.kfcUmsatz = 0;
 
-        this.restaurantUmsatz = [];
+        this.asiaUmsatz = 0;
+
+        this.pizzaUmsatz = 0;
+
     }
 
     /**
@@ -105,8 +108,6 @@ export default class PageStats extends Page {
                     } else {
                         html = html.replace("$EMAIL$", dataset.email);
                     }
-
-                    console.log(this.datenarray);
     
                     // Element in die Liste einfügen
                     let dummyElement = document.createElement("div");
@@ -118,24 +119,32 @@ export default class PageStats extends Page {
                 }
 
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].email != this.nichtbestellt) {
+                    if (data[i].email == "") {
+                    } else {
                         if (data[i].essen == "KFC_Pommes") {
                             this.kfcAnzahl++;
+                            var xkfc = data[i].anzahl * data[i].preis;
+                            this.kfcUmsatz = this.kfcUmsatz + xkfc;
                         } else if (data[i].essen == "Asia Wok_Sushi") {
                             this.asiaAnzahl++;
+                            var xasia = data[i].anzahl * data[i].preis;
+                            this.asiaUmsatz = this.asiaUmsatz + xasia;
                         } else {
                             this.pizzaAnzahl++;
+                            var xpizza = data[i].anzahl * data[i].preis;
+                            this.pizzaUmsatz = this.pizzaUmsatz + xpizza;
                         }
-                    } else {
-                        console.log("2221");
                     }
-                    console.log("22222");
                 }
-                console.log(this.kfcAnzahl);
-                //console.log(this.asiaAnzahl);
-                //console.log(this.pizzaAnzahl);
+                console.log(this.kfcUmsatz);
+                console.log(this.asiaUmsatz);
+                console.log(this.pizzaUmsatz);
 
                 // hier kommt kreisdiagramm mit anzahl von bestellungen pro restaurant
+
+
+
+                //hier kommt säulendiagramm umsatz pro restaurant
 
             //Button nur einmal drücken können
                 this.stateAkt++;
