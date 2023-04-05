@@ -25,6 +25,12 @@ export default class PageStats extends Page {
 
         this.counting = 0;
 
+        this.kfcAnzahl = 0;
+
+        this.asiaAnzahl = 0;
+
+        this.pizzaAnzahl = 0;
+
         this.restaurantAnzahl = [];
 
         this.restaurantUmsatz = [];
@@ -109,12 +115,27 @@ export default class PageStats extends Page {
                     liElement.remove();
                     olElement.appendChild(liElement);
 
-                    
                 }
 
                 for (let i = 0; i < data.length; i++) {
-                    console.log(data[i].essen);
+                    if (data[i].email != this.nichtbestellt) {
+                        if (data[i].essen == "KFC_Pommes") {
+                            this.kfcAnzahl++;
+                        } else if (data[i].essen == "Asia Wok_Sushi") {
+                            this.asiaAnzahl++;
+                        } else {
+                            this.pizzaAnzahl++;
+                        }
+                    } else {
+                        console.log("2221");
+                    }
+                    console.log("22222");
                 }
+                console.log(this.kfcAnzahl);
+                //console.log(this.asiaAnzahl);
+                //console.log(this.pizzaAnzahl);
+
+                // hier kommt kreisdiagramm mit anzahl von bestellungen pro restaurant
 
             //Button nur einmal drücken können
                 this.stateAkt++;
