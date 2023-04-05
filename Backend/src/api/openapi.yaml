@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Adressbuch
+  title: Bestellservice-App
   description: "Die Bestellservice-App nutzt einen simplen REST-Webservices zur Kommunikation\
     \ mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche,\
     \ Anzeige, Bearbeitung und Löschung von Adressen, wobei jede Adresse aus einer\
