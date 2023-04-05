@@ -42,38 +42,38 @@ paths:
     get:
       tags:
       - Bestellung
-      summary: Bestellung suchen
-      description: Suche nach Bestellungen. Gibt eine Liste aller Bestellungen passend zu
+      summary: Bestellung laden
+      description: Lade die Bestellungen. Gibt eine Liste aller Bestellungen passend zu
         den übergebenen Suchkriterien zurück.
-      operationId: search-order
+      operationId: load-order
       parameters:
-      - name: first_name
+      - email: email
         in: query
-        description: Gesuchter Vorname
+        description: E-Mailadresse
         required: false
         style: form
         explode: true
         schema:
           type: string
-      - name: last_name
+      - name: essen
         in: query
-        description: Gesuchter Nachname
+        description: Essensname
         required: false
         style: form
         explode: true
         schema:
           type: string
-      - name: phone
+      - name: preis
         in: query
-        description: Gesuchte Telefonnummer
+        description: Preis des Essens
         required: false
         style: form
         explode: true
         schema:
           type: string
-      - name: email
+      - name: anzahl
         in: query
-        description: Gesuchte E-Mailadresse
+        description: Anzahl des jeweiligen Essens
         required: false
         style: form
         explode: true
