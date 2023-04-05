@@ -35,9 +35,12 @@ class App {
                 url: "^/admin/$",
                 show: () => this._gotoAdmin()
             }, {
+                url: "^/stats/$",
+                show: () => this._gotoStats()
+            },{
                 url: ".*",
                 show: () => this._gotoList()
-            }, 
+            },
         ]);
 
         // Fenstertitel merken, um später den Name der aktuellen Seite anzuhängen
@@ -91,6 +94,22 @@ class App {
             let page = new PageAdmin(this);
             await page.init();
             this._showPage(page, "admin");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+       /**
+ * Statistikseite anzeigen. Wird vom Single Page Router aufgerufen.
+ */
+       async _gotoStats() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let { default: PageStats } = await import("./page-stats/page-stats.js");
+
+            let page = new PageStats(this);
+            await page.init();
+            this._showPage(page, "stats");
         } catch (ex) {
             this.showException(ex);
         }
