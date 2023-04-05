@@ -95,8 +95,8 @@ export default class PageList extends Page {
 
         let answer = confirm("Wollen Sie wirklich betellen?");
         if (!answer) return;
-        if (parseInt(this._anzahlInput) === 0) {
-            confirm("bitte die richtige Anzahl eingeben");
+        if (parseInt(this._anzahlInput) > 10 || parseInt(this._anzahlInput) < 1) {
+            confirm("bitte die richtige Anzahl (0<Anzahl<11) eingeben");
             return;
         }   
    
