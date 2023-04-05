@@ -45,7 +45,7 @@ export default class PageAdmin extends Page {
         this._title = "Admin";
 
         // Inhalte verstecken und Placeholder
-        let data = await this._app.backend.fetch("GET", "/address");
+        let data = await this._app.backend.fetch("GET", "/order");
         this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
         this._tempElement = this._mainElement.querySelector(".list-entry");
         this._tempElement.classList.add("hidden");

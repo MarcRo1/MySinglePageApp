@@ -45,7 +45,7 @@ export default class PageStats extends Page {
         this._title = "Admin";
 
         // Inhalte verstecken und Placeholder
-        let data = await this._app.backend.fetch("GET", "/address");
+        let data = await this._app.backend.fetch("GET", "/order");
         this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
         this._tempElement = this._mainElement.querySelector(".list-entry");
         this._tempElement.classList.add("hidden");
@@ -75,7 +75,7 @@ export default class PageStats extends Page {
 
         // Datensatz löschen
         try {
-            this._app.backend.fetch("DELETE", `/address/${id}`);
+            this._app.backend.fetch("DELETE", `/order/${id}`);
         } catch (ex) {
             this._app.showException(ex);
             return;
@@ -103,7 +103,7 @@ export default class PageStats extends Page {
             if (this.stateAkt == 0) {
                 // Je Datensatz einen Listeneintrag generieren
                 this._tempElement.classList.remove("hidden");
-                let data = await this._app.backend.fetch("GET", "/address");
+                let data = await this._app.backend.fetch("GET", "/order");
                 let olElement = this._mainElement.querySelector("ol");
     
                 let templateElement = this._mainElement.querySelector(".list-entry");
@@ -116,9 +116,9 @@ export default class PageStats extends Page {
                     let html = templateHtml;
     
                     html = html.replace("$ID$", dataset._id);
-                    html = html.replace("$LAST_NAME$", dataset.last_name);
-                    html = html.replace("$FIRST_NAME$", dataset.first_name);
-                    html = html.replace("$PHONE$", dataset.phone);
+                    html = html.replace("$ESSEN$", dataset.essen);
+                    html = html.replace("$ANZAHL$", dataset.anzahl);
+                    html = html.replace("$PREIS$", dataset.preis);
                     // Anzeigen ob die Bestellung auch bezahlt wurde oder nicht
                     if (dataset.email == "") {
                         html = html.replace("$EMAIL$", this.nichtbestellt);
