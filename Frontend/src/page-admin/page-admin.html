@@ -1,0 +1,145 @@
+<!-- Stylesheet der Seite -->
+<style>
+    /* LISTENEINTRÄGE */
+    main ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    main li {
+        margin: 0;
+        padding: 1em;
+        padding-bottom: 0.5em;
+        font-size: 60%;
+
+        background-color: white;
+        transition: background-color 0.5s;
+
+        border: 0px solid lightgrey;
+        border-bottom-width: 1px;
+    }
+
+    main li:hover {
+        background-color: #fafafa;
+    }
+
+    /* AKTIONSBUTTONS */
+    main .actions {
+        display: flex;
+    }
+
+    main .actions > div {
+        padding: 0.5em;
+        margin: 0.5em;
+        flex: 1;
+
+        background-color: #e0e0e0;
+        transition: background-color 0.5s;
+
+
+        text-align: center;
+    }
+
+    main .actions > div:first-child {
+        margin-left: 0;
+    }
+
+    main .actions > div:last-child {
+        margin-right: 0;
+    }
+
+    main .actions > div:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    main nav {
+        background-color: white;
+        display: flex;
+
+    }
+
+    main #aktButton {
+        background-color: lightcoral;
+        margin: 0.5em;
+        padding: 0.5em;
+        flex-grow: 1;
+    }
+
+    main #aktButton:hover {
+        cursor: pointer;
+        background-color: rgb(247, 179, 179);
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    th {
+        background-color: rgb(105, 95, 95);
+        color: white;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+
+<!-- Inhalt der Seite -->
+<main>
+    <nav>
+        <button class="action aktualisieren" id="aktButton">Daten Laden</button>
+    </nav>
+    <ol>
+        <!-- Platzhalter für eine leere Liste -->
+        <li class="empty-placeholder">
+            <div class="name">
+                Keine Einträge vorhanden
+            </div>
+        </li>
+        <!-- Vorlage für einen Eintrag in der Liste -->
+        <li class="list-entry" data-id="$ID$">
+            <table>
+                <tr>
+                  <th>Restaurant_Produkt</th>
+                  <th>Anzahl</th>
+                  <th>Preis</th>
+                  <th>Email</th>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name">
+                        $ESSEN$
+                    </div>
+                  </td>
+                  <td>
+                    <div class="field phone">
+                        $ANZAHL$
+                    </div>
+                  </td>
+                  <td>
+                    <div class="field email">
+                        $PREIS$
+                    </div>
+                  </td>
+                  <td>
+                    <div class="farb">
+                        $EMAIL$
+                    </div>
+                  </td>
+                </tr>
+            </table>
+            <div class="actions">
+                <div class="action delete">
+                    <a>Fehlerhafte Bestellung löschen</a>
+                </div>
+            </div>
+        </li>
+    </ol>
+</main>
