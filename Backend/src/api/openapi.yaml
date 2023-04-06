@@ -264,19 +264,19 @@ components:
           $ref: '#/components/schemas/HATEOAS_Resource'
         _id:
           type: string
-        first_name:
+        essen:
           type: string
-        last_name:
+        preis:
           type: string
-        phone:
+        anzahl:
           type: string
         email:
           type: string
           pattern: "(.*@.*\\..*)?"
       example:
         _id: "621ff9a936997df5baba746e"
-        first_name: "Fox"
-        last_name: "Mulder"
+        essen: "KFC_Pommes"
+        preis: "5"
+        anzahl: "1"
         email: "mulder@xfiles.com"
-        phone: "+49 721 553181"
   securitySchemes: {}
