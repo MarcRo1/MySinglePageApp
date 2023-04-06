@@ -102,17 +102,13 @@ export default class PageStats extends Page {
                 console.log(this.asiaUmsatz);
                 console.log(this.pizzaUmsatz);
 
-                // hier kommt kreisdiagramm mit anzahl von bestellungen pro restaurant
-
-                google.charts.load('current',{packages:['corechart']});
-
-                google.charts.setOnLoadCallback(drawChart);
+                var test = document.getElementById("asiaA").innerHTML;
+                document.getElementById("asiaA").innerHTML = this.asiaAnzahl;
+                console.log(test);
 
                 var xValues = ["KFC", "Asia Wok", "Pizzaria"];
                 var yValues = [this.kfcAnzahl, this.asiaAnzahl, this.pizzaAnzahl];
 
-
-                //hier kommt säulendiagramm umsatz pro restaurant
 
             //Button nur einmal drücken können
                 this.stateAkt++;
@@ -137,24 +133,4 @@ export default class PageStats extends Page {
 
     }
 
-    /**
-     * Zeichnet das Diagramm
-    */
-    _drawChart() {
-
-        const cdata = google.visualization.arrayToDataTable([
-          ['Restaurant', 'Umsatz'],
-          ['KFC', this.kfcUmsatz],
-          ['Asia Wok', this.asiaUmsatz],
-          ['Pizzaria', this.pizzaUmsatz],
-        ]);
-        
-        const options = {
-          title: 'Umsatz nach Restaurant'
-        };
-        
-        const chart = new google.visualization.BarChart(document.getElementById('myChart'));
-        chart.draw(cdata, options);
-        
-        }
 }
