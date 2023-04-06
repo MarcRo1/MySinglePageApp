@@ -99,7 +99,7 @@ new OrderController(server, "/order");
 server.listen(config.port, config.host, function() {
     console.log();
     console.log("=================");
-    console.log("Adressbuch-Server");
+    console.log("Orders-Server");
     console.log("=================");
     console.log();
     console.log("Ausführung mit folgender Konfiguration:");

@@ -71,7 +71,7 @@ export default class PageStats extends Page {
     }
     /**
      * @param {Booleen} state Status
-     * @param {Integer} anzahlAkt Anzahl der Aktualisierungen pro Sitzung
+     * @param {Integer} anzahlAkt Anzahl der Knopf-Drückungen pro Sitzung
     */
     async _statszeigen() {
         // Pop Up
@@ -104,6 +104,10 @@ export default class PageStats extends Page {
 
                 // hier kommt kreisdiagramm mit anzahl von bestellungen pro restaurant
 
+                google.charts.load('current',{packages:['corechart']});
+
+                google.charts.setOnLoadCallback(drawChart);
+
                 var xValues = ["KFC", "Asia Wok", "Pizzaria"];
                 var yValues = [this.kfcAnzahl, this.asiaAnzahl, this.pizzaAnzahl];
 
@@ -132,4 +136,25 @@ export default class PageStats extends Page {
         }
 
     }
+
+    /**
+     * Zeichnet das Diagramm
+    */
+    _drawChart() {
+
+        const cdata = google.visualization.arrayToDataTable([
+          ['Restaurant', 'Umsatz'],
+          ['KFC', this.kfcUmsatz],
+          ['Asia Wok', this.asiaUmsatz],
+          ['Pizzaria', this.pizzaUmsatz],
+        ]);
+        
+        const options = {
+          title: 'Umsatz nach Restaurant'
+        };
+        
+        const chart = new google.visualization.BarChart(document.getElementById('myChart'));
+        chart.draw(cdata, options);
+        
+        }
 }
