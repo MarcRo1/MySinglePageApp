@@ -96,8 +96,13 @@ export default class PageOrders extends Page {
         let answer = confirm("Möchten Sie jetzt bezahlen?");
         if (!answer) return;
         let email = prompt("Eingabe eMail-Adresse");
-        newOrder.email = email;
-        newOrder.payed = true;
+        
+        if (email != null && email != "") {
+            newOrder.email = email;
+            newOrder.payed = true;
+        }else {
+           alert ("Bitte richtiges Format eingeben/ Email darf nicht leer sein");              
+        }
 
         // Bestellung als bezahlt aktualisieren
         try {
