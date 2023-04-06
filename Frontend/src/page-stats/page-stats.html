@@ -77,6 +77,7 @@
         border-collapse: collapse;
         width: 100%;
         table-layout: fixed;
+
     }
 
     th {
@@ -89,6 +90,8 @@
         text-align: left;
         padding: 8px;
     }
+
+
 </style>
 
 <head>
@@ -100,31 +103,46 @@
     <nav>
         <button class="action stats" id="statsButton">Statistiken Laden</button>
     </nav>
-    <h3>Anzahl Bestellungen pro Restaurant</h3>
-    <table class="t1">
-        <tr>
-            <th>KFC</th>
-            <th>Asia Wok</th>
-            <th>Pizzeria</th>
-        </tr>
-        <tr>
-          <td id="kfcA">0</td>
-          <td id="asiaA">0</td>
-          <td id="pizzaA">0</td>
-        </tr>
-      </table>
-      <h3>Umsatz pro Restaurant</h3>
-      <table class="t2">
-        <tr>
-          <th>KFC</th>
-          <th>Asia Wok</th>
-          <th>Pizzeria</th>
-        </tr>
-        <tr>
-          <td id="kfcU">0</td>
-          <td id="asiaU">0</td>
-          <td id="pizzaU">0</td>
-        </tr>
-      </table>
-
+    <section id="hide" hidden>
+        <div class="GA">
+            <h2>Bezahlte Bestellungen Gesamt:     </h2>
+            <h2 id="gesamtA"></h2>
+        </div>
+        <div class="GU">
+            <h2>Realisierter Umsatz Gesamt:      </h2>
+            <h2 id="gesamtU"></h2>
+        </div>
+        <div class="UN">
+            <h3>Umbezahlte Bestellungen:      </h3>
+            <h3 id="gesamtUN"></h3>
+        </div>
+        <hr>
+        </hr>
+        <h3>Anzahl Bestellungen pro Restaurant</h3>
+        <table class="t1">
+            <tr>
+                <th>KFC</th>
+                <th>Asia Wok</th>
+                <th>Pizzeria</th>
+            </tr>
+            <tr>
+              <td id="kfcA">0</td>
+              <td id="asiaA">0</td>
+              <td id="pizzaA">0</td>
+            </tr>
+          </table>
+          <h3>Umsatz pro Restaurant</h3>
+          <table class="t2">
+            <tr>
+              <th>KFC</th>
+              <th>Asia Wok</th>
+              <th>Pizzeria</th>
+            </tr>
+            <tr>
+              <td id="kfcU">0</td>
+              <td id="asiaU">0</td>
+              <td id="pizzaU">0</td>
+            </tr>
+        </table>
+    </section>
 </main>

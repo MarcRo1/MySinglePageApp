@@ -18,10 +18,7 @@ export default class OrderService {
     }
 
     /**
-     * Bestellungen suchen. Unterstützt wird lediglich eine ganz einfache Suche,
-     * bei der einzelne Felder auf exakte Übereinstimmung geprüft werden.
-     * Zwar unterstützt MongoDB prinzipiell beliebig komplexe Suchanfragen.
-     * Um das Beispiel klein zu halten, wird dies hier aber nicht unterstützt.
+     * Bestellungen suchen. Die Anordnung soll nach dem Restaurant sortieren für die Admin sicht.
      *
      * @param {Object} query Optionale Suchparameter
      * @return {Promise} Liste der gefundenen Adressen
@@ -29,8 +26,7 @@ export default class OrderService {
     async search(query) {
         let cursor = this._orders.find(query, {
             sort: {
-                first_name: 1,
-                last_name: 1,
+                essen: 1,
             }
         });
 

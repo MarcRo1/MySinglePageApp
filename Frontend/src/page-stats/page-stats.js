@@ -21,7 +21,11 @@ export default class PageStats extends Page {
 
         this.schlüssel = "admin";
 
+        this.gesamtAnzahl = 0;
+
         this.gesamtUmsatz = 0;
+
+        this.unbezahlt = 0;
 
         this.kfcAnzahl = 0;
 
@@ -57,13 +61,6 @@ export default class PageStats extends Page {
         await super.init();
         this._title = "Stats";
 
-        // Inhalte verstecken und Placeholder
-        let data = await this._app.backend.fetch("GET", "/order");
-
-        if (data.length == 0) {
-            alert("Keine Bestellungen vorhanden!")
-        }
-
         // Aktualisieren Button
         let bElement = this._mainElement.querySelector("nav");
         bElement.querySelector(".action.stats").addEventListener("click", () => this._statszeigen());
@@ -82,32 +79,30 @@ export default class PageStats extends Page {
                 let data = await this._app.backend.fetch("GET", "/order");
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].email == "") {
+                        this.unbezahlt++;
                     } else {
                         if (data[i].essen == "KFC_Pommes") {
                             this.kfcAnzahl++;
+                            this.gesamtAnzahl++;
                             var xkfc = data[i].anzahl * data[i].preis;
                             this.kfcUmsatz = this.kfcUmsatz + xkfc;
+                            this.gesamtUmsatz = this.gesamtUmsatz + xkfc;
                         } else if (data[i].essen == "Asia Wok_Sushi") {
                             this.asiaAnzahl++;
+                            this.gesamtAnzahl++;
                             var xasia = data[i].anzahl * data[i].preis;
                             this.asiaUmsatz = this.asiaUmsatz + xasia;
+                            this.gesamtUmsatz = this.gesamtUmsatz + xasia;
                         } else {
                             this.pizzaAnzahl++;
+                            this.gesamtAnzahl++;
                             var xpizza = data[i].anzahl * data[i].preis;
                             this.pizzaUmsatz = this.pizzaUmsatz + xpizza;
+                            this.gesamtUmsatz = this.gesamtUmsatz + xpizza;
                         }
                     }
                 }
-                console.log(this.kfcUmsatz);
-                console.log(this.asiaUmsatz);
-                console.log(this.pizzaUmsatz);
 
-                var test = document.getElementById("asiaA").innerHTML;
-                document.getElementById("asiaA").innerHTML = this.asiaAnzahl;
-                console.log(test);
-
-                var xValues = ["KFC", "Asia Wok", "Pizzaria"];
-                var yValues = [this.kfcAnzahl, this.asiaAnzahl, this.pizzaAnzahl];
 
 
             //Button nur einmal drücken können
