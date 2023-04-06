@@ -4,7 +4,7 @@ import Page from "../page.js";
 import HtmlTemplate from "./page-admin.html";
 
 /**
- * Klasse PageAdmin: Stellt die Listenübersicht zur Verfügung
+ * Klasse PageAdmin: Zeigt eine tabellarische Übersicht
  */
 export default class PageAdmin extends Page {
     /**
@@ -24,21 +24,6 @@ export default class PageAdmin extends Page {
         this.schlüssel = "admin";
     }
 
-    /**
-     * HTML-Inhalt und anzuzeigende Daten laden.
-     *
-     * HINWEIS: Durch die geerbte init()-Methode wird `this._mainElement` mit
-     * dem <main>-Element aus der nachgeladenen HTML-Datei versorgt. Dieses
-     * Element wird dann auch von der App-Klasse verwendet, um die Seite
-     * anzuzeigen. Hier muss daher einfach mit dem üblichen DOM-Methoden
-     * `this._mainElement` nachbearbeitet werden, um die angezeigten Inhalte
-     * zu beeinflussen.
-     *
-     * HINWEIS: In dieser Version der App wird mit dem üblichen DOM-Methoden
-     * gearbeitet, um den finalen HTML-Code der Seite zu generieren. In größeren
-     * Apps würde man ggf. eine Template Engine wie z.B. Nunjucks integrieren
-     * und den JavaScript-Code dadurch deutlich vereinfachen.
-     */
     async init() {
         // HTML-Inhalt nachladen
         await super.init();
@@ -61,14 +46,14 @@ export default class PageAdmin extends Page {
     }
 
     /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
+     * Löschen der übergebenen Bestellung. Zeigt einen Popup, ob der Anwender
+     * die Bestellung löschen will und löscht diese dann.
      *
      * @param {Integer} id ID des zu löschenden Datensatzes
      */
     async _askDelete(id) {
         // Sicherheitsfrage zeigen
-        let answer = confirm("Soll die ausgewählte Adresse wirklich gelöscht werden?");
+        let answer = confirm("Soll die ausgewählte Bestellung wirklich gelöscht werden?");
         if (!answer) return;
 
         // Datensatz löschen
@@ -117,6 +102,7 @@ export default class PageAdmin extends Page {
                     html = html.replace("$ESSEN$", dataset.essen);
                     html = html.replace("$ANZAHL$", dataset.anzahl);
                     html = html.replace("$PREIS$", dataset.preis);
+                    
                     // Anzeigen ob die Bestellung auch bezahlt wurde oder nicht
                     if (dataset.email == "") {
                         html = html.replace("$EMAIL$", this.nichtbestellt);

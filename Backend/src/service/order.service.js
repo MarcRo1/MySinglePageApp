@@ -100,9 +100,9 @@ export default class OrderService {
     }
 
     /**
-     * Löschen einer Adresse anhand ihrer ID.
+     * Löschen einer Order anhand ihrer ID.
      *
-     * @param {String} id ID der gesuchten Adresse
+     * @param {String} id ID der gesuchten Order
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {

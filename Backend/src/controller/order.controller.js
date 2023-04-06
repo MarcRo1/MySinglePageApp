@@ -7,7 +7,7 @@ import RestifyError from "restify-errors";
 /**
  * HTTP-Controller-Klasse für Bestellungen.
  * Diese Klasse registriert alle notwendigen URL-Handler beim Webserver für einen einfachen REST-
- * Webservice zum Lesen und Schreiben von Adressen.
+ * Webservice zum Lesen und Schreiben von Bestellungen.
  */
 export default class OrderController {
     /**
@@ -20,11 +20,11 @@ export default class OrderController {
         this._service = new OrderService();
         this._prefix = prefix;
 
-        // Collection: Adressen
+        // Collection: Orders
         server.get(prefix, wrapHandler(this, this.search));
         server.post(prefix, wrapHandler(this, this.create));
 
-        // Entity: Adresse
+        // Entity: Order
         server.get(prefix + "/:id", wrapHandler(this, this.read));
         server.put(prefix + "/:id", wrapHandler(this, this.update));
         server.patch(prefix + "/:id", wrapHandler(this, this.update));
@@ -51,7 +51,7 @@ export default class OrderController {
     }
 
     /**
-     * GET /address
+     * GET /order
      * Bestellungen suchen
      */
     async search(req, res, next) {
@@ -62,7 +62,7 @@ export default class OrderController {
     }
 
     /**
-     * POST /address
+     * POST /order
      * Neue Bestellung anlegen
      */
     async create(req, res, next) {
