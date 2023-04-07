@@ -76,6 +76,8 @@ export default class PageStats extends Page {
         if (!answer) return;
         else {
             if (this.stateAkt == 0) {
+                var h = document.getElementById("hide");
+                h.removeAttribute("hidden");
                 let data = await this._app.backend.fetch("GET", "/order");
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].email == "") {
@@ -104,6 +106,27 @@ export default class PageStats extends Page {
                 }
 
 
+                document.getElementById("gesamtA").innerHTML = this.gesamtAnzahl;
+
+                document.getElementById("gesamtU").innerHTML = this.gesamtUmsatz;
+
+                document.getElementById("gesamtUN").innerHTML = this.unbezahlt;
+
+
+
+                document.getElementById("kfcA").innerHTML = this.kfcAnzahl;
+
+                document.getElementById("asiaA").innerHTML = this.asiaAnzahl;
+
+                document.getElementById("pizzaA").innerHTML = this.pizzaAnzahl;
+
+
+
+                document.getElementById("kfcU").innerHTML = this.kfcUmsatz;
+
+                document.getElementById("asiaU").innerHTML = this.asiaUmsatz;
+
+                document.getElementById("pizzaU").innerHTML = this.pizzaUmsatz;
 
             //Button nur einmal drücken können
                 this.stateAkt++;
